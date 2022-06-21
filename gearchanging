@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
+    int N, M, P;
+    cin >> N >> M >> P;
+
+    vector< double > crank;
+    vector< double > back;
+    vector< double > gears;
+
+    for( int i = 0; i < N; i++ ){
+        double c;
+        cin >> c;
+        crank.push_back(c);
+    }
+
+    for( int i = 0; i < M; i++ ){
+        double d;
+        cin >> d;
+        back.push_back(d);
+    }
+
+    for( int i = 0; i < N; i++ ){
+
+        for( int j = 0; j < M; j++ ){
+            double temp = crank[i]/back[j];
+            gears.push_back(temp);
+        }
+    }
+
+    sort(gears.begin(), gears.end());
+
+    double bound = P + 100;
+    for( int i = 0; i < N*M-1; i++ ){
+        // cout << gears[i+1]*100.0/gears[i] << endl;
+        double now = gears[i+1]*100;
+        double old = bound*gears[i];
+        // cout << "now " << now << " old " << old << endl;
+        if( now > old ){
+            cout << "Time to change gears!";
+            return 0;
+        }
+    }
+    
+    cout << "Ride on!";
+
+    return 0;
+}
